@@ -25,6 +25,7 @@
         <h1 id="hero-title">시대를 넘어<br><span>계속되는 실험.</span></h1>
         <p class="hero-lede">신해철과 넥스트의 음악을 따라가는 아카이브.<br>앨범을 고르고, 지금 바로 들어보세요.</p>
         <a class="hero-link" href="#albums">디스코그래피 둘러보기 <span>↓</span></a>
+        <button class="background-play" id="background-play">▶ <span>백그라운드 음악 시작</span><small>YOUTUBE · PLAYLIST</small></button>
       </div>
       <div class="hero-art" aria-label="N.EX.T를 상징하는 추상 그래픽">
         <div class="art-grid"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
@@ -41,7 +42,7 @@
           <p class="album-label">THE RETURN OF N.EX.T PART 1 : THE BEING · 1994</p>
           <h2 id="shell-title">껍질의<br><em>파괴</em></h2>
           <div class="track-meta"><span>THE DESTRUCTION OF THE SHELL</span><span>09:53</span></div>
-          <button class="listen-button spotlight-listen" data-song="The Destruction of the Shell: 껍질의 파괴" data-album="The Return of N.EX.T Part 1: The Being" data-album-id="being">▶ <span>이 곡 듣기</span></button>
+          <button class="listen-button spotlight-listen" data-song="The Destruction of the Shell: 껍질의 파괴">▶ <span>YouTube 재생목록 열기</span></button>
         </div>
         <div class="shell-description">
           <div class="quote-mark">“</div>
@@ -65,7 +66,7 @@
         <span class="track-count" id="track-count"></span>
       </div>
       <div class="album-grid" id="album-grid"></div>
-      <p class="catalog-note">※ 곡을 선택하면 Apple Music 플레이어가 이 페이지 안에서 열립니다. 전체 곡 재생은 Apple Music 구독 및 지역별 음원 제공 여부에 따라 달라지며, 미가입자는 미리듣기만 가능할 수 있습니다.</p>
+      <p class="catalog-note">※ 곡 버튼을 누르면 페이지 하단의 YouTube 재생목록으로 이동합니다. Music of Crom이 관리하는 N.EX.T 관련 공개 재생목록(104개 영상)을 사용하며, 스튜디오·라이브 버전이 섞여 있을 수 있습니다. 재생목록은 공식 전곡 목록이 아니며, 이 사이트의 모든 트랙이 들어 있다고 보장할 수 없습니다.</p>
     </section>
 
     <section class="about" id="about">
@@ -80,10 +81,11 @@
   <aside class="now-playing" id="now-playing" aria-label="사이트 내 음악 플레이어">
     <div class="player-heading">
       <div class="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-      <div class="now-copy"><span id="player-status">IN-PAGE PLAYER · APPLE MUSIC</span><strong id="now-title">곡을 골라 감상해보세요</strong></div>
+      <div class="now-copy"><span id="player-status">YOUTUBE · BACKGROUND PLAYLIST</span><strong id="now-title">백그라운드 음악을 시작해보세요</strong></div>
       <span class="player-badge">ON SITE</span>
+      <button class="player-stop" id="background-stop" hidden aria-label="백그라운드 재생 중지">■</button>
     </div>
-    <iframe id="apple-player" title="Apple Music 사이트 내 플레이어" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" allowfullscreen loading="lazy" hidden></iframe>
+    <iframe id="youtube-player" title="N.EX.T 백그라운드 YouTube 재생목록" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
   </aside>
   <script src="script.js"></script>
 </body>

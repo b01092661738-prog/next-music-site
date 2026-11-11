@@ -11,7 +11,7 @@
 
   <img src="https://img.shields.io/badge/language-Korean-d5ff40?style=flat-square&labelColor=191a16" alt="Korean">
   <img src="https://img.shields.io/badge/tracks-82-d5ff40?style=flat-square&labelColor=191a16" alt="82 tracks">
-  <img src="https://img.shields.io/badge/player-Apple%20Music-ff6b3d?style=flat-square&labelColor=191a16" alt="Apple Music player">
+  <img src="https://img.shields.io/badge/player-YouTube%20embed-ff6b3d?style=flat-square&labelColor=191a16" alt="YouTube embedded player">
 </div>
 
 ---
@@ -27,12 +27,14 @@ N.EX.T의 앨범과 곡을 찾아볼 수 있는 반응형 음악 아카이브입
 - **〈껍질의 파괴〉 스포트라이트** — 곡의 구성과 주제를 소개합니다.
 - **앨범별 트랙 탐색** — 정규 앨범과 주요 싱글의 82개 트랙을 모았습니다.
 - **검색과 필터** — 곡명이나 앨범명으로 찾고, 앨범별로 좁혀볼 수 있습니다.
-- **사이트 내 음악 플레이어** — 곡을 선택하면 Apple Music 임베드 플레이어가 페이지 하단에 표시됩니다.
+- **백그라운드 재생목록** — N.EX.T 관련 YouTube 재생목록을 페이지 하단에 고정해 스크롤 중에도 재생할 수 있습니다.
 - **반응형 레이아웃** — 데스크톱과 모바일 화면에 맞춰 배치됩니다.
 
 ## 재생 안내
 
-음원 파일을 복제하거나 직접 호스팅하지 않습니다. Apple Music의 공식 임베드 플레이어를 사용하며, **전체 곡 재생은 Apple Music 구독과 지역별 카탈로그 제공 여부에 따라 달라집니다.** 구독하지 않은 경우 미리듣기만 가능하거나, 일부 곡은 플레이어를 찾지 못할 수 있습니다.
+음원 파일을 복제하거나 직접 호스팅하지 않습니다. 공개 YouTube 재생목록을 공식 임베드 플레이어로 표시합니다. 브라우저의 자동재생 정책에 따라 방문자가 직접 재생을 시작해야 하며, 재생 가능 여부는 YouTube 영상의 임베드 설정과 지역별 제공 여부에 따릅니다.
+
+현재 연결된 재생목록은 [Music of Crom이 관리하는 N.EX.T 관련 104개 영상의 커뮤니티 재생목록](https://www.youtube.com/playlist?list=PL5E7998F0FE87B435)입니다. 정규 앨범의 모든 수록곡을 담은 공식 전곡 목록은 아니며, 라이브·중복 영상이 포함될 수 있습니다. 곡 버튼은 플레이어를 열지만, 개별 곡을 자동으로 찾아 재생하지는 않습니다. YouTube 재생목록 안에서 원하는 영상을 선택해 주세요.
 
 현재 목록은 주요 정규 앨범과 싱글을 중심으로 구성되어 있습니다. 라이브 음반, 편집 음반, 게임 OST 등 별도 발매물은 포함하지 않았습니다. 따라서 모든 발매 버전이나 모든 음원의 재생을 보장하지는 않습니다.
 
@@ -55,7 +57,7 @@ N.EX.T의 앨범과 곡을 찾아볼 수 있는 반응형 음악 아카이브입
 
 1. 저장소를 내려받거나 복제합니다.
 2. `index.html`을 브라우저에서 엽니다.
-3. 곡을 선택한 뒤, 페이지 아래 Apple Music 플레이어에서 재생합니다.
+3. **백그라운드 음악 시작**을 누르고, 페이지 아래 YouTube 플레이어에서 재생합니다.
 
 ```bash
 git clone https://github.com/b01092661738-prog/next-music-site.git
