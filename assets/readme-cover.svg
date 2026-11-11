@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">N.EX.T Music Archive</title>
+  <desc id="desc">Dark charcoal and acid-lime editorial cover artwork for the N.EX.T music archive.</desc>
+  <defs>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0V42" fill="none" stroke="#f2f3e8" stroke-opacity=".08" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#d5ff40" stop-opacity=".24"/>
+      <stop offset="1" stop-color="#d5ff40" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="orb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e6ff8c"/>
+      <stop offset="1" stop-color="#d5ff40"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="420" rx="18" fill="#11120f"/>
+  <rect width="1200" height="420" rx="18" fill="url(#grid)"/>
+  <circle cx="930" cy="210" r="245" fill="url(#glow)"/>
+  <g fill="none" stroke="#eff0e6" stroke-opacity=".72">
+    <ellipse cx="930" cy="210" rx="250" ry="106" transform="rotate(-29 930 210)"/>
+    <ellipse cx="930" cy="210" rx="290" ry="142" transform="rotate(31 930 210)" stroke-opacity=".3"/>
+  </g>
+  <circle cx="930" cy="210" r="112" fill="url(#orb)"/>
+  <g fill="#11120f" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800">
+    <text x="930" y="216" font-size="74" letter-spacing="-8">NEXT</text>
+    <text x="930" y="244" font-family="monospace" font-weight="400" font-size="10" letter-spacing="3">NEW EXPERIMENT TEAM</text>
+  </g>
+  <g font-family="Arial, 'Noto Sans KR', sans-serif">
+    <circle cx="80" cy="72" r="18" fill="#d5ff40"/>
+    <text x="80" y="79" fill="#11120f" font-weight="800" font-size="19" text-anchor="middle">N</text>
+    <text x="112" y="76" fill="#f0f0e8" font-weight="700" font-size="17" letter-spacing="1">N.EX.T <tspan fill="#8f9185" font-size="10" font-family="monospace" letter-spacing="2">MUSIC ARCHIVE</tspan></text>
+    <text x="72" y="197" fill="#f0f0e8" font-size="56" font-weight="700" letter-spacing="-3">시대를 넘어</text>
+    <text x="72" y="262" fill="#d5ff40" font-size="56" font-weight="700" letter-spacing="-3">계속되는 실험.</text>
+    <text x="76" y="310" fill="#a5a69c" font-size="16">신해철과 넥스트의 음악을 따라가는 아카이브</text>
+    <path d="M72 356H1128" stroke="#f0f0e8" stroke-opacity=".2"/>
+    <text x="74" y="386" fill="#92938a" font-family="monospace" font-size="10" letter-spacing="2">ROCK · PROGRESSIVE · ART</text>
+    <text x="1126" y="386" fill="#92938a" font-family="monospace" font-size="10" text-anchor="end" letter-spacing="2">SEOUL · KOREA · EST. 1992</text>
+  </g>
+</svg>
