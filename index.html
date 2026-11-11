@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11120f">
+  <meta name="description" content="신해철과 N.EX.T의 음악을 앨범별로 만나보세요. 껍질의 파괴부터 주요 정규 앨범과 싱글까지.">
+  <title>N.EX.T — 음악 아카이브</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="N.E.X.T 홈"><span class="brand-mark">N</span><span>N.EX.T<span class="brand-sub"> MUSIC ARCHIVE</span></span></a>
+    <nav aria-label="주요 메뉴"><a href="#shell">먼저 듣기</a><a href="#albums">앨범</a><a href="#about">밴드 소개</a></nav>
+    <a class="top-cta" href="#albums">음악 탐색 <span>↗</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span> SHIN HAE-CHUL &amp; N.EX.T · 1992—</p>
+        <h1 id="hero-title">시대를 넘어<br><span>계속되는 실험.</span></h1>
+        <p class="hero-lede">신해철과 넥스트의 음악을 따라가는 아카이브.<br>앨범을 고르고, 지금 바로 들어보세요.</p>
+        <a class="hero-link" href="#albums">디스코그래피 둘러보기 <span>↓</span></a>
+      </div>
+      <div class="hero-art" aria-label="N.EX.T를 상징하는 추상 그래픽">
+        <div class="art-grid"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="art-sun"></div><div class="art-type">NEXT<br><small>NEW EXPERIMENT TEAM</small></div>
+        <div class="art-caption">SEOUL · KOREA<br>EST. 1992</div><div class="art-index">01 / ∞</div>
+      </div>
+      <div class="hero-foot"><span>ROCK · PROGRESSIVE · ART</span><span>음악은 질문에서 시작된다</span><span>SCROLL TO EXPLORE ↓</span></div>
+    </section>
+
+    <section class="shell-feature" id="shell" aria-labelledby="shell-title">
+      <div class="section-kicker"><span>01</span> TRACK SPOTLIGHT</div>
+      <div class="shell-layout">
+        <div class="shell-title-block">
+          <p class="album-label">THE RETURN OF N.EX.T PART 1 : THE BEING · 1994</p>
+          <h2 id="shell-title">껍질의<br><em>파괴</em></h2>
+          <div class="track-meta"><span>THE DESTRUCTION OF THE SHELL</span><span>09:53</span></div>
+          <button class="listen-button spotlight-listen" data-song="The Destruction of the Shell: 껍질의 파괴">▶ <span>이 곡 듣기</span></button>
+        </div>
+        <div class="shell-description">
+          <div class="quote-mark">“</div>
+          <h3>정해진 틀 밖으로,<br>나를 깨우는 10분.</h3>
+          <p>2집 <em>The Being</em>의 문을 여는 대곡. 사회가 정해 둔 길과 익숙한 규칙에 질문을 던지고, 그 안에 갇힌 자아가 자기만의 목소리를 찾아가는 과정을 세 개의 장으로 펼쳐냅니다.</p>
+          <p>〈Overture〉의 긴장감 있는 도입에서 〈The Shell〉의 질주하는 밴드 사운드로, 다시 〈The Joy for the Destruction〉의 해방감으로 이어지는 약 9분 53초의 프로그레시브 록 여정. 신해철의 강렬한 보컬과 기타·키보드의 대화가 곡의 서사를 밀어 올립니다.</p>
+          <div class="movement-list"><span><b>I</b> OVERTURE</span><span><b>II</b> THE SHELL</span><span><b>III</b> THE JOY FOR THE DESTRUCTION</span></div>
+          <p class="editor-note">이 설명은 곡의 구성과 주제를 바탕으로 한 감상 안내입니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="catalog" id="albums" aria-labelledby="catalog-title">
+      <div class="catalog-heading">
+        <div><div class="section-kicker"><span>02</span> THE DISCOGRAPHY</div><h2 id="catalog-title">앨범으로 듣기<span class="period">.</span></h2></div>
+        <p class="catalog-intro">초기부터 마지막 정규작까지,<br>넥스트의 음악을 한곳에서.</p>
+      </div>
+      <div class="toolbar">
+        <label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="곡 또는 앨범 검색" autocomplete="off"><kbd>/</kbd></label>
+        <div class="filters" id="filters" aria-label="앨범 필터"></div>
+        <span class="track-count" id="track-count"></span>
+      </div>
+      <div class="album-grid" id="album-grid"></div>
+      <p class="catalog-note">※ 공식 음원 서비스에서 제공되는 곡을 찾을 수 있도록 YouTube 검색으로 연결합니다. 서비스와 지역에 따라 재생 가능 여부가 다를 수 있습니다.</p>
+    </section>
+
+    <section class="about" id="about">
+      <div class="about-number">N<br><span>.</span>E<br><span>.</span>X<br><span>.</span>T</div>
+      <div class="about-copy"><div class="section-kicker"><span>03</span> ABOUT THE BAND</div><h2>실험을 멈추지 않은<br>한국의 록 밴드.</h2><p>N.EX.T(New EXperiment Team)는 신해철을 중심으로 1992년 결성된 대한민국의 록 밴드입니다. 프로그레시브 록과 메탈, 팝을 넘나들며 시대의 질문을 음악으로 만들었습니다.</p><p>여기서는 정규 앨범과 대표 싱글의 트랙을 모아 감상할 수 있습니다. 라이브 버전·편집 음반·게임 OST 등 별도 발매물은 기본 목록에서 제외했습니다.</p></div>
+      <div class="about-stats"><div><strong>1992</strong><span>DEBUT</span></div><div><strong>7</strong><span>ALBUMS</span></div><div><strong id="total-songs">—</strong><span>TRACKS</span></div></div>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#top"><span class="brand-mark">N</span><span>N.EX.T<span class="brand-sub"> MUSIC ARCHIVE</span></span></a><span>신해철과 넥스트의 음악을 기억하며.</span><a href="#top">BACK TO TOP ↑</a></footer>
+
+  <aside class="now-playing" id="now-playing" aria-live="polite" aria-label="선택한 곡">
+    <div class="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="now-copy"><span>선택한 곡</span><strong id="now-title">곡을 골라 감상해보세요</strong></div><button id="now-listen" class="now-listen" disabled>YouTube에서 듣기 ↗</button>
+  </aside>
+  <script src="script.js"></script>
+</body>
+</html>
