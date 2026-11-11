@@ -41,7 +41,7 @@
           <p class="album-label">THE RETURN OF N.EX.T PART 1 : THE BEING · 1994</p>
           <h2 id="shell-title">껍질의<br><em>파괴</em></h2>
           <div class="track-meta"><span>THE DESTRUCTION OF THE SHELL</span><span>09:53</span></div>
-          <button class="listen-button spotlight-listen" data-song="The Destruction of the Shell: 껍질의 파괴">▶ <span>이 곡 듣기</span></button>
+          <button class="listen-button spotlight-listen" data-song="The Destruction of the Shell: 껍질의 파괴" data-album="The Return of N.EX.T Part 1: The Being" data-album-id="being">▶ <span>이 곡 듣기</span></button>
         </div>
         <div class="shell-description">
           <div class="quote-mark">“</div>
@@ -65,7 +65,7 @@
         <span class="track-count" id="track-count"></span>
       </div>
       <div class="album-grid" id="album-grid"></div>
-      <p class="catalog-note">※ 공식 음원 서비스에서 제공되는 곡을 찾을 수 있도록 YouTube 검색으로 연결합니다. 서비스와 지역에 따라 재생 가능 여부가 다를 수 있습니다.</p>
+      <p class="catalog-note">※ 곡을 선택하면 Apple Music 플레이어가 이 페이지 안에서 열립니다. 전체 곡 재생은 Apple Music 구독 및 지역별 음원 제공 여부에 따라 달라지며, 미가입자는 미리듣기만 가능할 수 있습니다.</p>
     </section>
 
     <section class="about" id="about">
@@ -77,8 +77,13 @@
 
   <footer><a class="brand" href="#top"><span class="brand-mark">N</span><span>N.EX.T<span class="brand-sub"> MUSIC ARCHIVE</span></span></a><span>신해철과 넥스트의 음악을 기억하며.</span><a href="#top">BACK TO TOP ↑</a></footer>
 
-  <aside class="now-playing" id="now-playing" aria-live="polite" aria-label="선택한 곡">
-    <div class="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="now-copy"><span>선택한 곡</span><strong id="now-title">곡을 골라 감상해보세요</strong></div><button id="now-listen" class="now-listen" disabled>YouTube에서 듣기 ↗</button>
+  <aside class="now-playing" id="now-playing" aria-label="사이트 내 음악 플레이어">
+    <div class="player-heading">
+      <div class="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="now-copy"><span id="player-status">IN-PAGE PLAYER · APPLE MUSIC</span><strong id="now-title">곡을 골라 감상해보세요</strong></div>
+      <span class="player-badge">ON SITE</span>
+    </div>
+    <iframe id="apple-player" title="Apple Music 사이트 내 플레이어" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" allowfullscreen loading="lazy" hidden></iframe>
   </aside>
   <script src="script.js"></script>
 </body>

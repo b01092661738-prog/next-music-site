@@ -21,8 +21,21 @@ const filters = [
   {id:'world',label:'WORLD'}, {id:'lazenca',label:'LAZENCA'}, {id:'gae',label:'개한민국'},
   {id:'regame',label:'REGAME?'}, {id:'666',label:'666'}, {id:'single',label:'싱글'}
 ];
+const appleAlbumSearch = {
+  home:'Home N.EX.T', being:'The Return of N.EX.T Part 1 The Being',
+  world:'The Return of N.EX.T Part 2 World', lazenca:'Lazenca A Space Rock Opera',
+  gae:'The Return of N.EX.T Part 3 Gae Han Min Gook', regame:'ReGame N.EX.T',
+  '666':'666 Trilogy Part I N.EX.T', single:'Here I Stand For You N.EX.T'
+};
+const appleAlbumPatterns = {
+  home:/\bhome\b/i, being:/\bbeing\b/i, world:/\bworld\b/i,
+  lazenca:/lazenca/i, gae:/gae.?han|republic.?of.?korea|part.?3/i,
+  regame:/regame/i, '666':/666/i, single:/here.?i.?stand|arirang|single|ep/i
+};
+const appleTrackCache = new Map();
 let activeFilter = 'all';
 let currentQuery = '';
+let playerRequest = 0;
 
 function makeFilters(){
   filterBox.innerHTML = filters.map(({id,label}) => `<button class="filter-chip${id===activeFilter?' active':''}" data-filter="${id}">${label}</button>`).join('');
@@ -43,32 +56,100 @@ function renderAlbums(){
     visibleTracks += matching.length;
     const card = document.createElement('article');
     card.className = 'album-card';
-    card.innerHTML = `<div class="album-head"><div class="album-art" style="--cover-a:${album.colors[0]};--cover-b:${album.colors[1]}" aria-hidden="true">${String(albumIndex+1).padStart(2,'0')}</div><div class="album-info"><h3>${album.title}</h3><p>${album.year} · ${album.detail}</p></div><div class="album-total"><strong>${String(matching.length).padStart(2,'0')}</strong>TRACKS</div></div><ol class="track-list">${matching.map(({title,index}) => `<li class="track-row${title.startsWith('The Destruction of the Shell')?' is-spotlight':''}"><span class="track-no">${String(index+1).padStart(2,'0')}</span><span class="track-name">${title}</span><button class="row-listen" aria-label="${title} 듣기" data-song="${title}">▶</button></li>`).join('')}</ol>`;
+    card.innerHTML = `<div class="album-head"><div class="album-art" style="--cover-a:${album.colors[0]};--cover-b:${album.colors[1]}" aria-hidden="true">${String(albumIndex+1).padStart(2,'0')}</div><div class="album-info"><h3>${album.title}</h3><p>${album.year} · ${album.detail}</p></div><div class="album-total"><strong>${String(matching.length).padStart(2,'0')}</strong>TRACKS</div></div><ol class="track-list">${matching.map(({title,index}) => `<li class="track-row${title.startsWith('The Destruction of the Shell')?' is-spotlight':''}"><span class="track-no">${String(index+1).padStart(2,'0')}</span><span class="track-name">${title}</span><button class="row-listen" aria-label="${title} 사이트 안에서 듣기" data-song="${title}" data-album="${album.title}" data-album-id="${album.id}">▶</button></li>`).join('')}</ol>`;
     albumGrid.append(card);
   });
   count.textContent = `${visibleTracks} TRACKS`;
   if(!visibleTracks) albumGrid.innerHTML = '<div class="empty-state">검색 결과가 없습니다. 다른 곡명으로 검색해보세요.</div>';
-  albumGrid.querySelectorAll('[data-song]').forEach(button => button.addEventListener('click', () => chooseSong(button.dataset.song)));
+  albumGrid.querySelectorAll('[data-song]').forEach(button => button.addEventListener('click', () => chooseSong(button.dataset.song, button.dataset.album, button.dataset.albumId)));
 }
 
-function youtubeSearch(song){
-  return `https://www.youtube.com/results?search_query=${encodeURIComponent(`N.EX.T 신해철 ${song} 공식`)}`;
+function normalizeTrackTitle(title){
+  return title.toLocaleLowerCase('ko')
+    .replace(/\b(?:part|pt\.?)\s*(i{1,3}|[1-3])\b/g, (_match, part) => `part${/^[1-3]$/.test(part) ? part : part.length}`)
+    .replace(/\binstrumental\b|\binst\.?\b|bonus\s*track/gi, '')
+    .replace(/[^a-z0-9가-힣]/g, '');
 }
 
-function chooseSong(song){
+function titleMatches(wanted, actual){
+  const wantedParts = wanted.split(/[:：]/).map(normalizeTrackTitle).filter(Boolean);
+  const actualParts = actual.split(/[:：]/).map(normalizeTrackTitle).filter(Boolean);
+  return wantedParts.some(a => actualParts.some(b => a === b || (Math.min(a.length,b.length) > 5 && (a.includes(b) || b.includes(a)))));
+}
+
+async function findAppleTrack(song, albumId){
+  const cacheKey = `${albumId}:${song}`;
+  if(appleTrackCache.has(cacheKey)) return appleTrackCache.get(cacheKey);
+  const albumTerm = appleAlbumSearch[albumId] || '';
+  const queryTitles = [song,
+    song.replace(/\bpart\s+(i{1,3})\b/gi, (_match, roman) => `Part ${roman.length}`),
+    song.replace(/\bpt\.?\s+(i{1,3})\b/gi, (_match, roman) => `Pt. ${roman.length}`)
+  ];
+  const queries = [...new Set(queryTitles.flatMap(title => [`${title} ${albumTerm}`, title]))];
+  const results = new Map();
+  for(const query of queries){
+    const url = `https://itunes.apple.com/search?entity=song&limit=50&country=us&term=${encodeURIComponent(query)}`;
+    const response = await fetch(url);
+    if(!response.ok) continue;
+    const data = await response.json();
+    for(const track of data.results || []) if(track.trackId) results.set(track.trackId, track);
+    const hit = [...results.values()].find(track =>
+      /n\.(?:ex|e\.x)\.t/i.test(track.artistName || '') &&
+      appleAlbumPatterns[albumId]?.test(track.collectionName || '') &&
+      titleMatches(song, track.trackName || '') && track.trackViewUrl
+    );
+    if(hit){ appleTrackCache.set(cacheKey, hit); return hit; }
+  }
+  const hit = [...results.values()].find(track =>
+    /n\.(?:ex|e\.x)\.t/i.test(track.artistName || '') &&
+    titleMatches(song, track.trackName || '') && track.trackViewUrl
+  );
+  appleTrackCache.set(cacheKey, hit || null);
+  return hit || null;
+}
+
+async function chooseSong(song, albumTitle, albumId){
+  const requestId = ++playerRequest;
+  const player = document.querySelector('#apple-player');
+  const shell = document.querySelector('#now-playing');
+  const status = document.querySelector('#player-status');
   document.querySelector('#now-title').textContent = song;
-  const listen = document.querySelector('#now-listen');
-  listen.disabled = false;
-  listen.onclick = () => window.open(youtubeSearch(song), '_blank', 'noopener,noreferrer');
-  window.open(youtubeSearch(song), '_blank', 'noopener,noreferrer');
+  shell.classList.add('has-track','is-loading');
+  player.hidden = true;
+  player.removeAttribute('src');
+  status.textContent = 'APPLE MUSIC · 음원 정보를 찾는 중…';
+  try{
+    const track = await findAppleTrack(song, albumId);
+    if(requestId !== playerRequest) return;
+    if(!track){
+      shell.classList.remove('is-loading');
+      status.textContent = '이 곡의 Apple Music 임베드를 찾지 못했습니다.';
+      return;
+    }
+    const embed = new URL(track.trackViewUrl);
+    embed.hostname = 'embed.music.apple.com';
+    embed.searchParams.delete('uo');
+    player.title = `${track.artistName} — ${track.trackName} Apple Music 플레이어`;
+    player.src = embed.toString();
+    player.hidden = false;
+    status.textContent = `${track.artistName} · Apple Music 플레이어`;
+    shell.classList.remove('is-loading');
+  }catch(error){
+    if(requestId !== playerRequest) return;
+    shell.classList.remove('is-loading');
+    status.textContent = '플레이어를 불러오지 못했습니다. 잠시 후 다시 선택해 주세요.';
+    console.error('Apple Music embed lookup failed:', error);
+  }
 }
 
 search.addEventListener('input', event => {
   currentQuery = event.target.value.trim().toLocaleLowerCase('ko');
   renderAlbums();
 });
-document.querySelector('#now-listen').addEventListener('click', () => {});
-document.querySelector('.spotlight-listen').addEventListener('click', () => chooseSong('The Destruction of the Shell: 껍질의 파괴'));
+document.querySelector('.spotlight-listen').addEventListener('click', event => {
+  const button = event.currentTarget;
+  chooseSong(button.dataset.song, button.dataset.album, button.dataset.albumId);
+});
 document.addEventListener('keydown', event => {
   if(event.key === '/' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) { event.preventDefault(); search.focus(); }
   if(event.key === 'Escape') search.blur();
